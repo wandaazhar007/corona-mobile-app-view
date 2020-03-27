@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corona Virus || Wanda Azhar</title>
+    <title>Data Real Time Covid-19</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style-global.css">
@@ -28,7 +28,7 @@
     ?>
 
     <div class="navbar">
-        <img src="" alt="">
+    <img src="img/img1.png" alt="">
         <i class="fa fa-info"></i>
     </div>
 
@@ -47,9 +47,9 @@
                         <td><?php echo $i['cases'] ?> Orang</td>
                     </tr>
                     <tr>
-                        <td>Today</td>
+                        <td>Aktif</td>
                         <td>:</td>
-                        <td><?php echo $i['todayCases'] ?> Orang</td>
+                        <td><?php echo $i['active'] ?> Orang</td>
                     </tr>
                     <tr>
                         <td>Meninggal</td>
@@ -57,24 +57,19 @@
                         <td><?php echo $i['deaths'] ?> Orang</td>
                     </tr>
                     <tr>
-                        <td>Today Death</td>
-                        <td>:</td>
-                        <td><?php echo $i['todayDeaths'] ?> Orang</td>
-                    </tr>
-                    <tr>
                         <td>Sembuh</td>
                         <td>:</td>
                         <td><?php echo $i['recovered'] ?> Orang</td>
                     </tr>
                     <tr>
-                        <td>Aktif</td>
+                        <td>Today</td>
                         <td>:</td>
-                        <td><?php echo $i['active'] ?> Orang</td>
+                        <td><?php echo $i['todayCases'] ?> Orang</td>
                     </tr>
                     <tr>
-                        <td>Krisis</td>
+                        <td>Today Deaths</td>
                         <td>:</td>
-                        <td><?php echo $i['critical'] ?> Orang</td>
+                        <td><?php echo $i['todayDeaths'] ?> Orang</td>
                     </tr>
                 </table>
             </div>
@@ -84,7 +79,7 @@
 
     <nav class="nav">
         <a href="index.php" class="nav_link">
-            <i class="fa fa-newspaper-o nav_icon"></i>
+            <i class="fa fa-home nav_icon"></i>
             <span class="nav_text">Home</span>
         </a>
         <a href="global-data.php" class="nav_link">
@@ -92,7 +87,7 @@
             <span class="nav_text">Global</span>
         </a>
         <a href="#" class="nav_link">
-            <i class="fa fa-home nav_icon"></i>
+            <i class="fa fa-newspaper-o nav_icon"></i>
             <span class="nav_text">Berita</span>
         </a>
         <a href="#" class="nav_link">
