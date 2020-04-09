@@ -27,7 +27,7 @@
         // echo $output;
         return $output;
     }
-    $data = http_request("https://coronavirus-19-api.herokuapp.com/all");
+    $data = http_request("https://api.kawalcorona.com/indonesia");
     $data = json_decode($data, true);
     ?>
     <?php
@@ -42,7 +42,7 @@
             // echo $output;
             return $output2;
         }
-        $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
+        $data_country = http_request_country("https://api.kawalcorona.com/indonesia/provinsi");
         $data_country = json_decode($data_country, true);
     ?>
 
@@ -68,7 +68,7 @@
 
 
         <div class="cover-round-medium"></div>
-        <p id="text_p">Informasi Terkini Wabah Virus Corona</p>
+        <p id="text_p">Informasi Terkini Wabah Covid-99</p>
         <a href="https://www.instagram.com/wanda_azharr/" style="text-decoration: none;"><p id="text_p2">Testerrr</p></a>
         <div class="card-info">
             <h6 align="center">Data Kasus Covid-19 Dunia</h6>

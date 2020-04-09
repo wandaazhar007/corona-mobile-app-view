@@ -21,14 +21,18 @@
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
         $output = curl_exec($ch);
-        curl_close($ch);
+        // curl_close($ch);
         // echo $output;
         return $output;
+        // echo var_dump($data);
     }
-    $data = http_request("https://coronavirus-19-api.herokuapp.com/all");
+    $data = http_request("https://api.kawalcorona.com/indonesia");
+    // $data = http_request("https://coronavirus-19-api.herokuapp.com/all");
     $data = json_decode($data, true);
+    // print_r($data);
+        // die;
     ?>
     <?php 
         function http_request_country($url2){
@@ -44,13 +48,54 @@
         }
         $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
         $data_country = json_decode($data_country, true);
+        
     ?>
+
+    <?php 
     
-    <div class="navbar">
+    $url = "https://api.kawalcorona.com/indonesia/";
+ 
+    $client = curl_init($url);
+    curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+    $response = curl_exec($client);
+    
+    $result = json_decode($response);
+   
+   
+    $Confirmed = $result[0]->positif;
+    
+    $Deaths = $result[0]->meninggal;
+    
+    $Recovered = $result[0]->sembuh;
+
+    $datetimeString = $result[0]->lastupdate;
+    
+    $Last_Update = date("l d F Y, H:i:s", strtotime($datetimeString));
+   
+   
+    echo "Confirmed: ".$Confirmed;
+    echo "<br>";
+    echo "Deaths: ".$Deaths;
+    echo "<br>";
+    echo "Recovered: ".$Recovered;
+    echo "<br>";
+    echo "Last Update: ".$Last_Update;
+   
+   ?>    
+
+   <?php 
+      
+     $json = file_get_contents('https://api.kawalcorona.com/indonesia/provinsi');
+     $data_provinsi = json_decode($json, true);
+    //  var_dump($data_provinsi[0]['attributes']['Provinsi']);
+    // var_dump($json);
+   ?>
+   
+    <!-- <div class="navbar">
         <img src="img/img1.png" alt="">
         <i class="fa fa-info"></i>
-    </div>
-    
+    </div> -->
+  
     <div class="container">
 
         <div class="owl owl-carousel owl-theme">
@@ -65,62 +110,62 @@
                 </div>
             </div>
         </div>
-
+      
 
         <div class="cover-round-medium"></div>
         <p id="text_p">Informasi Terkini Wabah Virus Corona</p>
         <a href="https://www.instagram.com/wanda_azharr/" style="text-decoration: none;"><p id="text_p2">by Wanda Azhar</p></a>
         <div class="card-info">
-            <h6 align="center">Data Kasus Covid-19 Dunia</h6>
+            <h6 align="center">Data Kasus Covid-19 Indonesia</h6>
             <a href="https://coronavirus-19-api.herokuapp.com/all" style="text-decoration: none; color: black"> <p align="center">Sumber Data</p></a>
             <div class="row justify-content-center">
                 <a href="#"data-toggle="modal" class="items" data-target="#positif_dunia" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Positif</h5>
                         <i class=" fa fa-user-plus"></i>
-                        <p align="center"><?php echo $data['cases']; ?></p>
+                        <p align="center"><?php echo $result[0]->positif; ?></p>
                     </div>
                 </a>
                 <a href="#"data-toggle="modal" class="items" data-target="#mati_dunia" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Mati</h5>
                         <i class=" fa fa-user-times" id="icon2"></i>
-                        <p align="center"><?php echo $data['deaths']; ?></p>
+                        <p align="center"><?php echo $result[0]->meninggal;; ?></p>
                     </div>
                 </a>
                 <a href="#"data-toggle="modal" class="items" data-target="#sembuh_dunia" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Sembuh</h5>
                         <i class=" fa fa-user" id="icon3"></i>
-                        <p align="center"><?php echo $data['recovered']; ?></p>
+                        <p align="center"><?php echo $result[0]->sembuh ?></p>
                     </div>
                 </a>
             </div>
         </div>
 
         <div class="card-info-indonesia">
-            <h6 align="center">Data Kasus Covid-19 <?php echo $data_country[35]['country'] ?></h6>
+            <h6 align="center">Data Kasus Covid-19 <?php echo $data_provinsi[0]['attributes']['Provinsi'] ?></h6>
             <a href="https://coronavirus-19-api.herokuapp.com/countries" style="text-decoration: none; color: black;"><p align="center">Sumber Data</p></a>
             <div class="row justify-content-center">
                 <a href="#"data-toggle="modal" class="items" data-target="#positif_ind" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Positif</h5>
                         <i class=" fa fa-user-plus"></i>
-                        <p align="center"><?php echo $data_country[35]['cases'] ?></p>
+                        <p align="center"><?php echo $data_provinsi[0]['attributes']['Kasus_Posi'] ?></p>
                     </div>
                 </a>
                 <a href="#"data-toggle="modal" class="items" data-target="#mati_ind" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Mati</h5>
                         <i class=" fa fa-user-times" id="icon2"></i>
-                        <p align="center"><?php echo $data_country[35]['deaths'] ?></p>
+                        <p align="center"><?php echo $data_provinsi[0]['attributes']['Kasus_Semb'] ?></p>
                     </div>
                 </a>
                 <a href="#"data-toggle="modal" class="items" data-target="#sembuh_ind" style="text-decoration: none; color: black;">
                     <div class="items">
                         <h5 align="center">Sembuh</h5>
                         <i class=" fa fa-user" id="icon3"></i>
-                        <p align="center"><?php echo $data_country[35]['recovered'] ?></p>
+                        <p align="center"><?php echo $data_provinsi[0]['attributes']['Kasus_Meni'] ?></p>
                     </div>
                 </a>
             </div>
@@ -150,10 +195,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="card-body">
-            <h6 style="color: red; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Orang Positif Covid-19 Diseluruh Negara</h6>
+            <h6 style="color: red; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Orang Positif Covid-19 Diseluruh Indonesia</h6>
             <i class=" fa fa-user-plus" style="color: red; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: red; font-weight: bold;">
-                <?php echo $data['cases']; ?> Orang
+            <?php echo $result[0]->positif; ?> Orang
             </p>
           </div>
           <div class="modal-footer">
@@ -166,10 +211,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="card-body">
-            <h6 style="color: black; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Meninggal Covid-19 Diseluruh Negara</h6>
+            <h6 style="color: black; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Meninggal Covid-19 Diseluruh Indonesia</h6>
             <i class=" fa fa-user-times" style="color: black; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: black; font-weight: bold;">
-                <?php echo $data['deaths']; ?> Orang
+                <?php echo $result[0]->meninggal; ?> Orang
             </p>
           </div>
           <div class="modal-footer">
@@ -182,10 +227,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="card-body">
-            <h6 style="color: green; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Sembuh Covid-19 Diseluruh Negara</h6>
+            <h6 style="color: green; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Sembuh Covid-19 Diseluruh Indonesia</h6>
             <i class=" fa fa-user" style="color: green; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: green; font-weight: bold;">
-                <?php echo $data['recovered']; ?> Orang
+                <?php echo $result[0]->sembuh; ?> Orang
             </p>
           </div>
           <div class="modal-footer">
@@ -194,15 +239,15 @@
         </div>
       </div>
     </div>
-
+<!-- Modal Indonesia -->
     <div class="modal fade" id="positif_ind" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="card-body">
-            <h6 style="color: red; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Orang Positif Covid-19 Diseluruh Negara</h6>
+            <h6 style="color: red; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Orang Positif Covid-19 di <?php echo $data_provinsi[0]['attributes']['Provinsi'] ?></h6>
             <i class=" fa fa-user-plus" style="color: red; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: red; font-weight: bold;">
-                <?php echo $data_country[35]['cases']  ?> Orang
+                <?php echo $data_provinsi[0]['attributes']['Kasus_Posi']  ?> Orang
             </p>
           </div>
           <div class="modal-footer">
@@ -218,7 +263,7 @@
             <h6 style="color: black; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Meninggal Covid-19 Diseluruh Indonesia</h6>
             <i class=" fa fa-user-times" style="color: black; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: black; font-weight: bold;">
-            <?php echo $data_country[35]['deaths']  ?> Orang
+            <?php echo $data_provinsi[0]['attributes']['Kasus_Meni'] ?> Orang
             </p>
           </div>
           <div class="modal-footer">
@@ -234,7 +279,7 @@
             <h6 style="color: green; font-weight: 500; text-align: center; margin-top: 20px; font-size: 18px;">Jumlah Korban Sembuh Covid-19 Diseluruh Indonesia</h6>
             <i class=" fa fa-user" style="color: green; font-size: 100px; margin-left: 100px;"></i>
             <p style="text-align: center; color: green; font-weight: bold;">
-            <?php echo $data_country[35]['recovered']  ?> Orang
+            <?php echo $data_provinsi[0]['attributes']['Kasus_Semb']  ?> Orang
             </p>
           </div>
           <div class="modal-footer">
