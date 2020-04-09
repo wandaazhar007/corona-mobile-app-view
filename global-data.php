@@ -12,19 +12,25 @@
 <body>
 
 <?php 
-    function http_request_country($url){
+    // function http_request_country($url){
 
-        $ch = curl_init();
+    //     $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        $output = curl_exec($ch);
-        curl_close($ch);
-        // echo $output;
-        return $output;
-    }
-    $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
-    $data_country = json_decode($data_country, true);
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+    //     $output = curl_exec($ch);
+    //     curl_close($ch);
+    //     // echo $output;
+    //     return $output;
+    // }
+    // $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
+    // $data_country = json_decode($data_country, true);
+    ?>
+    <?php 
+        $json = file_get_contents('https://api.kawalcorona.com/indonesia/provinsi');
+        $data_provinsi = json_decode($json, true);
+        // var_dump($data_provinsi);
+        // die;
     ?>
 
     <div class="navbar">
@@ -35,41 +41,26 @@
     <div class="container">
         <div class="row">
                 <?php 
-                    foreach($data_country as $i) {
+                    foreach($data_provinsi as $i) {
                 ?>  
             <div class="box">
                   
-                <h2><?php echo $i['country'] ?></h2>
+                <h2><?php echo $i['attributes']['Provinsi'] ?></h2>
                 <table align="center" class="tabel1">
                     <tr>
-                        <td>Kasus</td>
+                        <td>Positif</td>
                         <td>:</td>
-                        <td><?php echo $i['cases'] ?> Orang</td>
-                    </tr>
-                    <tr>
-                        <td>Aktif</td>
-                        <td>:</td>
-                        <td><?php echo $i['active'] ?> Orang</td>
+                        <td><?php echo $i['attributes']['Kasus_Posi'] ;?> Orang</td>
                     </tr>
                     <tr>
                         <td>Meninggal</td>
                         <td>:</td>
-                        <td><?php echo $i['deaths'] ?> Orang</td>
+                        <td><?php echo $i['attributes']['Kasus_Meni'] ;?> Orang</td>
                     </tr>
                     <tr>
                         <td>Sembuh</td>
                         <td>:</td>
-                        <td><?php echo $i['recovered'] ?> Orang</td>
-                    </tr>
-                    <tr>
-                        <td>Today</td>
-                        <td>:</td>
-                        <td><?php echo $i['todayCases'] ?> Orang</td>
-                    </tr>
-                    <tr>
-                        <td>Today Deaths</td>
-                        <td>:</td>
-                        <td><?php echo $i['todayDeaths'] ?> Orang</td>
+                        <td><?php echo $i['attributes']['Kasus_Semb'] ;?> Orang</td>
                     </tr>
                 </table>
             </div>
@@ -84,7 +75,7 @@
         </a>
         <a href="global-data.php" class="nav_link">
             <i class="fa fa-gratipay nav_icon"></i>
-            <span class="nav_text">Global</span>
+            <span class="nav_text">Indonesia</span>
         </a>
         <a href="#" class="nav_link">
             <i class="fa fa-newspaper-o nav_icon"></i>

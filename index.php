@@ -16,38 +16,38 @@
 <body>
 
     <?php 
-    function http_request($url){
+    // function http_request($url){
 
-        $ch = curl_init();
+    //     $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-        $output = curl_exec($ch);
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    //     $output = curl_exec($ch);
         // curl_close($ch);
         // echo $output;
-        return $output;
+        // return $output;
         // echo var_dump($data);
-    }
-    $data = http_request("https://api.kawalcorona.com/indonesia");
+    // }
+    // $data = http_request("https://api.kawalcorona.com/indonesia");
     // $data = http_request("https://coronavirus-19-api.herokuapp.com/all");
-    $data = json_decode($data, true);
+    // $data = json_decode($data, true);
     // print_r($data);
         // die;
     ?>
     <?php 
-        function http_request_country($url2){
+        // function http_request_country($url2){
 
-            $th = curl_init();
+        //     $th = curl_init();
     
-            curl_setopt($th, CURLOPT_URL, $url2);
-            curl_setopt($th, CURLOPT_RETURNTRANSFER, 1); 
-            $output2 = curl_exec($th);
-            curl_close($th);
-            // echo $output;
-            return $output2;
-        }
-        $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
-        $data_country = json_decode($data_country, true);
+        //     curl_setopt($th, CURLOPT_URL, $url2);
+        //     curl_setopt($th, CURLOPT_RETURNTRANSFER, 1); 
+        //     $output2 = curl_exec($th);
+        //     curl_close($th);
+        //     // echo $output;
+        //     return $output2;
+        // }
+        // $data_country = http_request_country("https://coronavirus-19-api.herokuapp.com/countries");
+        // $data_country = json_decode($data_country, true);
         
     ?>
 
@@ -68,18 +68,9 @@
     
     $Recovered = $result[0]->sembuh;
 
-    $datetimeString = $result[0]->lastupdate;
+    // $datetimeString = $result[0]->lastupdate;
     
-    $Last_Update = date("l d F Y, H:i:s", strtotime($datetimeString));
-   
-   
-    echo "Confirmed: ".$Confirmed;
-    echo "<br>";
-    echo "Deaths: ".$Deaths;
-    echo "<br>";
-    echo "Recovered: ".$Recovered;
-    echo "<br>";
-    echo "Last Update: ".$Last_Update;
+    // $Last_Update = date("l d F Y, H:i:s", strtotime($datetimeString));
    
    ?>    
 
@@ -91,10 +82,10 @@
     // var_dump($json);
    ?>
    
-    <!-- <div class="navbar">
+    <div class="navbar">
         <img src="img/img1.png" alt="">
         <i class="fa fa-info"></i>
-    </div> -->
+    </div>
   
     <div class="container">
 
@@ -178,7 +169,7 @@
         </a>
         <a href="global-data.php" class="nav_link">
             <i class="fa fa-gratipay nav_icon"></i>
-            <span class="nav_text">Global</span>
+            <span class="nav_text">Indonesia</span>
         </a>
         <a href="#" class="nav_link">
             <i class="fa fa-newspaper-o nav_icon"></i>
